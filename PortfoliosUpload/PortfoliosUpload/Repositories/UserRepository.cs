@@ -24,7 +24,7 @@ namespace PortfoliosUpload.Repositories
         {
             try
             {
-                var users = db.users.Include(u => u.images).Select(u => new { u.userId, u.userName, u.userPhone, u.Pictures.Count });
+                var users = db.users.Include(u => u.images).Select(u => new { u.userId, u.userName, u.userPhone, u.images.Count });
                 return users;
             }
             catch
