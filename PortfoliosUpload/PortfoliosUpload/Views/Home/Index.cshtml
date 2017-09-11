@@ -1,1 +1,73 @@
-﻿ Here is an information about the programm
+﻿@section scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
+    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+    <script src="~/Scripts/modules/app.js"></script>
+    <script src="~/Scripts/services/userService.js"></script>
+    <script src="~/Scripts/services/passIdService.js"></script>
+    <script src="~/Scripts/controllers/userController.js"></script>
+}
+<div ng-app="testapp">
+    <div ng-controller="userController">
+        <div ng-class="row">
+            <div col-md-12><h3 style="margin-left:25%">All Users</h3></div>
+        </div>
+        <form name="addUser" novalidate>
+            <div ng-class="row">
+                <div class="col-md-1">Name:</div>
+                <div class="col-md-2">
+                    <input type="text" name="userName" data-ng-model="User.UserName" ng-required="true" />
+                    <span class="error" ng-show="addUser.userName.$invalid">*Required</span>
+                </div>
+                @*<div class="col-md-1">Birth Date:</div>*@
+                @*<div class="col-md-2">
+                    <p class="input-group">
+                        <input type="text" name="birthDate" class="form-control" uib-datepicker-popup data-ng-model="User.BirthDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="open2()" readonly />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                        <span class="error" ng-show="addUser.birthDate.$invalid">*Required</span>
+                    </p>
+                </div>*@
+                <div class="col-md-6">
+                    <button type="submit" ng-click="submit()" ng-disabled="!addUser.$valid">Add</button>
+                </div>
+            </div>
+        </form>
+        <div ng-class="row">
+            <div class="col-md-12"> </div>
+        </div>
+        <div ng-class="row">
+            <div class="col-md-1">Name </div>
+            <div class="col-md-1">Picture Count</div>
+            <div class="col-md-9"> </div>
+        </div>
+        <div ng-class="row">
+            <div class="col-md-12">___________________________________________________</div>
+        </div>
+        <div ng-repeat="user in usersData| pagination : currentPage*itemsPerPage | limitTo: itemsPerPage">
+            <div ng-class="row">
+                <div class="col-md-1"><a href="#" ng-click="show_pictures(user)">{{user.UserName}}</a></div>
+                @*<div class="col-md-1">{{user.BirthDate|date:'yyyy-dd-MM'}}</div>*@
+                <div class="col-md-1">{{user.Count}}</div>
+                <div class="col-md-9"> </div>
+            </div>
+            <div ng-class="row">
+                <div class="col-md-12">___________________________________________________</div>
+            </div>
+        </div>
+
+        <div ng-class="row">
+            <div class="col-md-12">
+                <a href="" ng-click="prevPage()">« Prev</a>
+                <div ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)" style="display:inline">
+                    <a href="#" style="font-size:20px;">{{n+1}}</a>
+                </div>
+                <a href="" ng-click="nextPage()">Next »</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
